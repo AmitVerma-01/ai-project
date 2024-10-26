@@ -1,5 +1,6 @@
 const AI_projects = [
     {
+        id:1,
         title : "Lung Cancer Prediction using Machine Learning",
         image : "/lungCancer.jpg",
         price : 299,
@@ -23,6 +24,7 @@ const AI_projects = [
         }
     },
     {
+        id:2,
         title : "Fake News Detection using Machine Learning",
         price : 299,
         image : "/fakeNews.jpg",
@@ -37,6 +39,7 @@ const AI_projects = [
         }
     },
     {
+        id:3,
         title : "skin cancer prediction using machine learning",
         price : 299,
         image : "/skinCancer.jpg",
@@ -51,6 +54,7 @@ const AI_projects = [
         }
     },
     {
+        id:4,
         title : "House Price Prediction",
         price : 299,
         image : "/housePrice.jpg",
@@ -65,6 +69,7 @@ const AI_projects = [
         }
     },
     {
+        id:5,
         title : "Fake URL detection",
         price : 299,
         image : "/fakeUrl.jpg",

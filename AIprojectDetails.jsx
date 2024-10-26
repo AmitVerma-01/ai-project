@@ -1,23 +1,38 @@
-import React, { useState } from 'react'
-
+import React, { useEffect, useState } from 'react'
+import AI_projects from '../../aiProjects';
+import { useParams } from 'react-router-dom';
 function AIprojectDetails() {
-    const [isWishlisted,  setWishlist] = useState(false)
-    function handleClick(){
-        setWishlist(pre => !pre);
+    const [isWishlisted, setWishlist] = useState(false);
+    const { id } = useParams();
+    const [project, setProject] = useState(null);
+
+    useEffect(() => {
+        // Find the project based on the param (assuming param is an id or slug)
+        // console.log(id)
+        const foundProject = AI_projects[id-1];
+        setProject(foundProject);
+    }, [id]);
+    
+    function handleClick() {
+        setWishlist(prev => !prev);
     }
+
+    if (!project) return <div>Loading...</div>;
+    // console.log(project);
+    
   return (
     <div className='w-full h-screen p-5 md:px-28'>
         
         <div className='sm:flex justify-between items-center'>
             <div className='rounded-xl my-3 overflow-hidden md:max-w-[30%] min max-h-[50%]'>
-                <img src="/ai.jpeg" alt="Project-Image" className='w-full h-full'/>    
+                <img src={project.image} alt="Project-Image" className='w-full h-full'/>    
             </div>      
             <div className='xs:p-5'>
-                <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold'>
-                    Lung Cancer Prediction using Machine Learning
+                <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold my-2'>
+                    {project.title}
                 </h1>
                 <div className='flex justify-between items-center md:block'>
-                    <p className='font-semibold md:text-md lg:text-xl'>Price: <span>$ 200</span></p>
+                    <p className='font-semibold md:text-md lg:text-xl'>Price: <span>Rs {project.price} </span></p>
                     <div className='flex justify-start space-x-3 items-center'>
                         <button className='text-white bg-[#4285F4] rounded-md py-1 px-2 md:py-2 md:px-4 md:mt-3 lg:py-3 lg:px-6'>Buy Now</button>
                         <button className='bg-[#4285F4] rounded-md py-1 px-2 md:py-2 md:px-4 md:mt-3 lg:py-3 lg:px-6' onClick={handleClick}>
@@ -32,14 +47,14 @@ function AIprojectDetails() {
                 <h2 className='sm:text-xl font-bold'>Introduction : </h2>
                 {/* <br /> */}
                 <hr />
-                <p className='pl-5'>Lung cancer is one of the leading causes of death globally, making early detection critical for improving patient outcomes. Traditional methods for lung cancer diagnosis involve imaging techniques and biopsies, which can be time-consuming and invasive. Machine learning offers a non-invasive and faster alternative by analyzing patterns in patient data to predict the likelihood of lung cancer. This project leverages machine learning algorithms, specifically Support Vector Machines (SVM), to predict lung cancer based on medical and patient data, improving early detection rates.</p>
+                <p className='pl-5'>{project.introduction}</p>
             </div>
             <div>
                 <h2 className='sm:text-xl font-bold'>
                     Technology :
                 </h2><hr />
                 <p className='pl-5'>
-                <b>Support Vector Machine (SVM)</b> is the machine learning technique used in this project. SVM is a powerful supervised learning algorithm well-suited for binary classification tasks, such as predicting whether a patient has lung cancer based on input features. By finding an optimal boundary (hyperplane) between classes, SVM can effectively classify patients with or without cancer based on various medical inputs like tumor size, age, smoking history, and more.
+                {project.technology}
                 </p>
             </div>
         </div>
